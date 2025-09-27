@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;  // Needed for UI text
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CannonController : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class CannonController : MonoBehaviour
     {
         HandleRotation();
         HandleFire();
+
+        if (Input.GetKeyDown(KeyCode.R)) // use GetKeyDown so it only triggers once
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     void HandleRotation()
@@ -40,6 +46,7 @@ public class CannonController : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) horizontal = 1f;
         if (Input.GetKey(KeyCode.S)) vertical = 1f;
         if (Input.GetKey(KeyCode.W)) vertical = -1f;
+        
 
         // Rotate cannon around Y-axis (left/right)
         cannon.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime, Space.World);
